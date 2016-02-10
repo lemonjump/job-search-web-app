@@ -1,0 +1,52 @@
+extends header
+
+block content
+	#status(style='width:80%;background:#F9EECF;border:1px solid blue;')
+		img#profilePic(src='../public/images/profilec.png', style='width:170px;height:170px;border:1px solid black;', align='left')
+		h3#name Name: #{user.name}
+		h4#Rating Current Rating: #{user.rating}
+		h4#count This user was reviewed #{user.comments.length} times
+		h4#goodRatingNum Positive Reviews: #{user.goodReviews}
+		h4#badReviews Bad Reviews: #{user.badReviews}
+	#commentSection(style='width:80%;background:#F9EECF;border:1px solid green;text-align:center')
+		form(action='/rate', method='post')
+			h2 Comments:
+			textarea#Comment(name='review', cols='40', rows='4', required)
+			h3#ratingGuide Rating free lancer 
+			input(type='submit', value='Submit')
+			button(type='button', onclick='cancelReview()') Cancel Review
+			input(type="hidden" name="reviewer" value=logged_user.user.email)
+			input(type="hidden" name="reviewerName" value=logged_user.user.name)
+			input(type="hidden" name="freelancer" value=user.email)
+			
+	#reviewSection(style='width:80%;background:#F9EECF;border:1px solid green;')
+		.table-responsive
+			table(class="table table-striped", id="userList")
+				thead
+					th Reviews
+				tbody
+					for c in user.comments
+						tr 
+							td
+								c(style='width:80%;background:#F9EECF;border:1px solid green;')
+									h3#name #{c.reviewerName}
+									img#profilePic(src='../public/images/profilec.png', style='width:50px;height:50px;border:1px solid black;', align='left')
+									pre. 
+										#{c.comment}
+									p Rating: #{c.reviewRating}
+									p #{c.timeStamp}
+	script.
+		reviewerRole = "#{logged_user.user.role}";
+		freeLancerRole = "#{user.role}";
+		// Removing a freelancer's ability to rate and comment on others
+		// Remove a user's ability from commenting on themselves
+		if(reviewerRole == 0 || "#{logged_user.user.email}" == "#{user.email}"){
+			document.getElementById('commentSection').innerHTML = "";
+		}
+		document.getElementById('ratingGuide').innerHTML += "(<p style='color:red;display:inline-block'>0</p>";
+		document.getElementById('ratingGuide').innerHTML += " - <p style='color:green;display:inline-block'>100</p>): ";
+		document.getElementById('ratingGuide').innerHTML += "<input id='rating' type='number', size='10', name='rating_value' min=0 max=100 required>"
+		function cancelReview(){
+			document.getElementById('Comment').value = "";
+			document.getElementById('rating').value = "";
+		}

@@ -1,0 +1,117 @@
+extends header
+
+block content							
+	.row
+		.col-md-12
+			h2
+				|Edit profile
+		.col-md-8
+			form(action="/users/"+user.user.email,method="post",class="form-horizontal")
+				.form-group
+					label(for ="inputEmail",class="col-sm-3 control-label").
+						Email
+					.col-sm-5
+						input(type="email", class="form-control", id="inputEmail", placeholder="Email", readonly="readonly",value=user.user.email)
+				.form-group
+					label(for ="inputRole",class="col-sm-3 control-label").
+						Role
+					.col-sm-5
+						-var roleString = "N/A"
+						if (user.user.role == 0)
+							-roleString = "Freelancer"
+						if (user.user.role == 1)
+							-roleString = "Employer"
+						if (user.user.role == 2)
+							-roleString = "Admin"
+						input(type="email", class="form-control", id="inputRole", readonly="readonly",value=roleString)		
+				.form-group
+					label(for ="inputName",class="col-sm-3 control-label").
+						Display Name
+					.col-sm-5
+						input(type="text",class="form-control",id="inputName",placeholder="Display Name",name="name",value=user.user.name)
+				if user.user.role == 1	
+					.form-group
+						label(for ="inputDescription",class="col-sm-3 control-label").
+							Description
+						.col-md-5
+							textarea(class="form-control" rows="5", id="description",style="resize:none",name="description",placeholder="Short Bio")
+								|#{user.user.description}
+				if user.user.role == 0	
+					.form-group
+						label(for ="inputLang",class="col-sm-3 control-label").
+							Language spoken
+						.col-sm-5
+							input(type="text",class="form-control",id="inputLang",placeholder="English",name="language",value=user.user.language)
+				
+
+					.form-group
+						label(for ="inputEdu",class="col-sm-3 control-label").
+							Education
+						.col-sm-5
+							input(type="text",class="form-control", id="inputEdu",placeholder="UofT",name="education",value=user.user.education)
+
+				.form-group
+						label(for ="inputLocation",class="col-sm-3 control-label").
+							Location
+						.col-sm-5
+							input(type="text",class="form-control", id="inputLocation",placeholder="Toronto",name="location",value=user.user.location)
+				.form-group
+					label(for ="inputSite",class="col-sm-3 control-label").
+						Website
+					.col-sm-5
+						input(type="text",class="form-control", id="inputSite",placeholder="example.com",name="site",value=user.user.site)
+
+				if user.user.role == 0			
+					.form-group
+						label(for ="inputCV",class="col-sm-3 control-label").
+							Resume
+						.col-md-5
+							textarea( class="form-control", rows="9",id="inputCV",style="resize:none",
+							name="resume")
+								|#{user.user.resume}				
+				.form-group
+					div(class="col-sm-offset-3 col-sm-8")
+						.btn-toolbar
+							button(type="submit",class="btn btn-success custom-button-width")
+								|Update
+							button(type="button",class="btn btn-danger custom-button-width",onclick="window.location.reload()")
+								|Cancel	
+	if(user.user.email == logged_user.user.email)
+		.row
+			.col-md-12
+				h2
+					|Change Password
+		.row
+			.col-md-8
+				if(message.length > 0)
+					div(class="alert alert-danger") #{message}
+				form(class="form-horizontal",id="passwordForm",action="/users/"+user.user.email,onsubmit="return validateEPass()",method="post")
+					.form-group
+						label(for ="inputOldPassword",class="col-sm-3 control-label").
+							Old Password
+						.col-sm-5
+							input(type="password",class="form-control",id="inputOldPassword",name="oldpass")
+
+					.form-group
+						label(for ="ePassword",class="col-sm-3 control-label").
+							New Password
+						.col-sm-5
+							input(type="password",class="form-control",id="ePassword",placeholder="",onkeyup="nonEmptyPass()",name="newpass")
+						.col-sm-1
+							span(id="invalidEPass",class="hide glyphicon glyphicon-remove text-danger",aria hidden="true",style="padding-top: 50%")
+
+							span(id="validEPass",class="hide glyphicon glyphicon-ok text-success",aria hidden="true",style="padding-top: 50%")
+						
+					.form-group
+						label(for ="eConfirm",class="col-sm-3 control-label").
+							Confirm Password
+						.col-sm-5
+							input(type="password",class="form-control",id="eConfirm",placeholder="",onkeyup="checkEditPass()")
+						.col-sm-1
+							span(id="validEConfirm",class="hide glyphicon glyphicon-ok text-success",aria hidden="true",style="padding-top: 50%")
+							span(id="invalidEConfirm",class="hide glyphicon glyphicon-remove text-danger",aria hidden="true",style="padding-top: 50%")
+								|&nbsp; Passwords don't match
+					.form-group
+						div(class="col-sm-offset-3 col-sm-5")
+							button(type="submit",class="btn btn-success btn-block").
+								Change Password

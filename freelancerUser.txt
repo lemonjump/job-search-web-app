@@ -1,0 +1,24 @@
+Freelancer:
+
+Part of the profile has "skills" which enables the search function to filter job
+postings by skill type when a Freelancer searches for a job.
+
+Elements an employer might search by:
+
+- Programming Languages
+- Spoken/Written Languages
+- Education (drop-down)
+- Location
+
+Other Attributes:
+
+- Username (UNIQUE)
+- Name
+- Age
+- Gender
+- Bio
+- Picture
+- User since:
+- Length of inactivity
+- Website
+- Resume (list of closed contracts from site)

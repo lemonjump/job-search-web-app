@@ -1,0 +1,42 @@
+CSC309 - Assignment 5
+
+Overview:
+
+Creating a site that connects freelancers with employers (and vice versa).
+
+Social Networking:
+- Job interview prior to task assignment/contract
+- Cap the number of messages
+- Cap the message length
+
+Rating/Commenting:
+- Employers can rate and comment on a freelancer's performance
+- Ranked by percentage of good minus bad
+- New freelancers start at 0
+
+Search and Recommendation:
+- Freelancer can search for job
+- Employer can search for job
+- Employer can search for Freelancer
+- Search query for Employer ^^
+- Search results refined by skill set for Freelancer
+
+Employer Actions:
+- Post, delete, update job
+- Talk to Freelancer
+- Accept Freelancer
+
+Freelancer Actions:
+- Accept job
+- Talk to Employer
+
+Additional Implementation:
+- 3rd party login
+- Security vulnerability check
+- Performance improvement
+- Host on free site
+
+Also need:
+- Testing demo
+- Documentation
+- YouTube video

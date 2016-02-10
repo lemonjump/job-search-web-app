@@ -1,0 +1,28 @@
+extends header
+
+block content
+	.row
+		.col-md-12
+			h2
+				|Admin View
+				p
+					form(class="form-horizontal",action="/freelancers")
+						.form-group
+							.btn-toolbar
+								div(class="col-sm-3")
+									button(type="submit",class="btn btn-success btn-block").
+										View Freelancers
+				p
+					form(class="form-horizontal",action="/users")
+						.form-group
+							.btn-toolbar
+								div(class="col-sm-3")
+									button(type="submit",class="btn btn-success btn-block").
+										View All Users
+				p
+					form(class="form-horizontal",action="/offers")
+						.form-group
+							.btn-toolbar
+								div(class="col-sm-3")
+									button(type="submit",class="btn btn-warning btn-block").
+										View All Offers

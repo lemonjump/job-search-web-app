@@ -1,0 +1,58 @@
+extends header
+
+block content
+	.well
+		.row
+			.col-md-12
+				H3
+					|#{user.user.email}&nbsp;
+					if (logged_user.role >= 2||logged_user.user.email == user.user.email)
+						small
+							a(href="/edit/#{user.email}")
+								|Edit
+			
+		.row
+			.col-md-6
+				Strong
+					|Email:&nbsp;
+				|#{user.user.email}			
+				br
+				br
+				Strong
+					|Display Name:	
+				|#{user.user.name}		
+				br
+				br
+				Strong
+					|Spoken/Written Languages:&nbsp;
+				|#{user.user.language || "Undisclosed"}
+				br
+				br
+				Strong
+					|Education :&nbsp;
+				|#{user.user.education || "Undisclosed"}
+				br
+				br
+				Strong
+					|Website:&nbsp;
+				a(href="http://" + "#{user.user.site}")
+					|#{user.user.site}
+				br
+				br
+				Strong
+					|Location:&nbsp;
+				|#{user.user.location || "Undisclosed"}
+	H3
+		|Freelancer statistics:
+	p
+		Strong
+			|Jobs completed:
+		|&nbsp;#{user.user.jobsDone}		
+	p
+		Strong
+			|Profile views:
+		|&nbsp;#{user.user.viewsCount}			
+	p
+		Strong
+			|Rating:
+		|&nbsp;#{user.user.rating}					

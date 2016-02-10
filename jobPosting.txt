@@ -1,0 +1,15 @@
+Job Posting Elements:
+
+- Salary range
+- Programming Languages
+- Written/Spoken Languages
+- Location
+
+Other Attributes:
+
+- Requirements
+- Description
+- Boolean: open or closed
+
+Viewable by Admin:
+- Time contract has been open (to delete if expired)

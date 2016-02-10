@@ -1,0 +1,19 @@
+extends header
+
+block content
+	.row
+		.col-md-12
+			h2 #{"Welcome, "+logged_user.user.email}
+	
+	.table-responsive
+		table(class="table table-striped", id="userList")
+			thead
+				th User Email
+				th Display Name
+			tbody
+				for u in userlist
+					tr 
+						td
+							a(href='/users/'+u.user.email)= u.user.email
+						td= u.user.name
+	#tests

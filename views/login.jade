@@ -1,0 +1,43 @@
+extends outer_header
+
+block content
+	div(class="col-sm-6 col-sm-offset-3")
+		h1
+			i(class="fa fa-sign-in")
+			&nbsp; Login
+
+		if(message.length > 0)
+			div(class="alert alert-danger") #{message}
+
+		form(action="/login" method="post",class="form-horizontal",id="loginForm",name="adduser")
+			.form-group
+				label(for ="inputEmail",class="col-sm-2 control-label").
+					Email
+				.col-sm-6
+					input(type="email",class="form-control",id="inputEmail",placeholder="Email",name="email")
+			.form-group
+				label(for ="inputPassword",class="col-sm-2 control-label").
+					Password
+				.col-sm-6
+					input(type="password",class="form-control",id="inputPassword",placeholder="Password",name="password")
+			.form-group
+					input(type="hidden",id="lscrRes",value="0x0",name="resolution")
+					div(class="col-sm-offset-2 col-sm-6")
+						button(id="loginBtn",class="btn btn-warning btn-block").
+							Login
+
+		hr
+		p
+			|Need and account ? 
+			a(href="/signup")
+				|Sign Up
+		hr
+		h2
+			i(class="fa fa-sign-in")
+			&nbsp; Login with Facebook
+		a(href="/auth/facebook",class="btn btn-primary")
+			span(class="fa fa-facebook")
+				FaceBook
+
+
+

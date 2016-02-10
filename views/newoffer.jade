@@ -1,0 +1,47 @@
+extends header
+
+block content
+	.row
+		.col-md-12
+			h2 #{"Create new job offer"}
+	.row
+		.col-md-8
+			if(message.length > 0)
+				div(class="alert alert-danger") #{message}
+
+			div(id="invalidForm",class="hide glyphicon glyphicon-remove text-danger"
+			,aria hidden="true",style = "margin-bottom:2%")
+				|&nbsp;Please fill in all the fields
+				br
+
+			form(action="/newoffer",onsubmit="return validateNewOffer()",method="post",class="form-horizontal")
+				.form-group
+					label(for ="offerTitle",class="col-sm-3 control-label").
+						Title
+					.col-md-5
+						input(type="text", class="form-control", id="offerTitle", placeholder="Title",name = "offerTitle")
+				br
+				.form-group
+					label(for ="offerTitle",class="col-sm-3 control-label").
+						Budget $/hour
+					.col-md-5
+						input(type="text", class="form-control", id="offerBudget", placeholder="$50",name = "budget")
+				br
+				.form-group
+					label(for ="offerTitle",class="col-sm-3 control-label").
+						Location
+					.col-md-5
+						input(type="text", class="form-control", id="offerLocation", placeholder="Remote",name = "location")
+				br					
+				.form-group
+					label(for ="inputDescription",class="col-sm-3 control-label").
+						Description
+					.col-md-6
+						textarea( class="form-control" rows="10" id="offerDesc",style="resize:none",placeholder="Description",name="offerDesc")
+				.form-group
+					div(class="col-sm-offset-3 col-sm-8")
+							.btn-toolbar
+								button(type="submit",class="btn btn-warning custom-button-width")
+									|Post
+
+						

@@ -1,0 +1,20 @@
+extends layout
+
+block content
+	.container
+		.page-header
+			.col-sm-1
+				a(href="/admin")
+					img(src="/public/images/rocket.png", alt="cool logo", class="img-responsive",heigh="50",width="50")
+			h1= title
+			p.lead #{appname}
+		.row
+			.col
+				p.text-center
+					button(type ="button",class="btn btn-success", onclick="login()").
+						Admin Login
+		br
+		br
+		p.text-center
+			| Not admin?&nbsp;&nbsp;
+			a(href="/") Back to Main Page

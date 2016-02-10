@@ -1,0 +1,45 @@
+extends header
+
+block content
+	h2.
+		Dashboard
+	p
+		form(class="form-horizontal",action="/edit")
+					.form-group
+						.btn-toolbar
+							div(class="col-sm-3")
+								button(type="submit",class="btn btn-success btn-block").
+									Complete Your profile			
+	if logged_user.user.role == 0
+		p
+			form(class="form-horizontal",action="/todo")
+						.form-group
+							.btn-toolbar
+								div(class="col-sm-3")
+									button(type="submit",class="btn btn-info btn-block").
+										View your unfinished jobs
+	if logged_user.user.role == 1
+		p
+			form(class="form-horizontal",action="/jobstatus")
+						.form-group
+							.btn-toolbar
+								div(class="col-sm-3")
+									button(type="submit",class="btn btn-info btn-block").
+										View your offers																
+
+	p
+		form(class="form-horizontal",action="/offers")
+					.form-group
+						.btn-toolbar
+							div(class="col-sm-3")
+								button(type="submit",class="btn btn-danger btn-block").
+									View Offers
+	p
+		form(class="form-horizontal",action="/freelancers")
+					.form-group
+						.btn-toolbar
+							div(class="col-sm-3")
+								button(type="submit",class="btn btn-warning btn-block").
+									View Freelancers							
+
+			

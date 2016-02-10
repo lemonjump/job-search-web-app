@@ -1,0 +1,83 @@
+extends header
+
+block content
+	.well
+		.row
+			.col-md-12
+				H3= user.email
+				if ((logged_user.user.role == 2 && user.user.role != 2) || logged_user.user.email == user.user.email)
+					small
+						a(href="/edit/#{user.user.email}")
+							|Edit
+		
+		.row
+			.col-md-4
+					img(src="/public/images/profilec.png" class="img-circle" alt="ProfilePic" width="140" height="140")
+			.col-md-6
+				Strong
+					|Email:&nbsp;
+				|#{user.user.email}			
+				br
+				br
+				Strong
+					|Display Name:	
+				|#{user.user.name}		
+				br
+				br
+				Strong
+					|Description:&nbsp;
+				|#{user.user.description}	
+				br
+				br
+				Strong
+					|Role:&nbsp;
+				if (user.user.role == 0)
+					|Freelancer
+				else if (user.user.role == 1)
+					|Employer
+				else
+					|Administrator	
+				br
+				br
+		if (logged_user.user.role == 2 && logged_user.user.email != user.user.email)
+			.row
+				.col-md-4
+					form(action="",method="post",class="form-horizontal")
+						.form-group
+							div(class="col-sm-6")
+								if(user.user.role ==0)
+									button(id="loginBtn",class="btn btn-info btn-block",value="2",name="role").
+										Make Admin
+								else
+									button(id="loginBtn",class="btn btn-info btn-block",value="0",name="role").
+										Revoke Admin		
+					form(action="",method="post",class="form-horizontal")
+						.form-group
+							div(class="col-sm-6")
+								button(id="loginBtn",class="btn btn-danger btn-block",name="delete",value='1').
+									Delete
+	if (logged_user.user.role >= 2)
+		hr
+		p
+			H3
+				|Stats
+		p
+			strong
+				|IP adress:&nbsp;
+			| #{user.user.last_ip}	
+		p
+			strong
+				|User's OS:&nbsp;
+			| #{user.user.os}
+		p
+			strong
+				|Screen resolution:&nbsp;
+			| #{user.user.resolution}
+		p
+			strong
+				|Browser:&nbsp;
+			| #{user.user.browser}
+		p
+			strong
+				|Engine:&nbsp;
+			| #{user.user.engine}											

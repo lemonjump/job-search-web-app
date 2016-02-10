@@ -1,0 +1,43 @@
+extends header
+
+block content							
+	.row
+		.col-md-12
+			h2
+				|Edit Offer
+		.col-md-8
+			form(action="/editoffer/"+offer.offer.title,method="post",class="form-horizontal")
+				.form-group
+					label(for ="inputTitle",class="col-sm-3 control-label").
+						Title
+					.col-sm-5
+						input(type="text", class="form-control", id="inputTitle", readonly="readonly",value=offer.offer.title)
+				.form-group
+					label(for ="inputDescription",class="col-sm-3 control-label").
+						Description
+					.col-md-5
+						textarea(class="form-control" rows="5", id="description",style="resize:none",name="description")
+							|#{offer.offer.description}
+				.form-group
+					label(for ="inputBudget",class="col-sm-3 control-label").
+						Budget
+					.col-sm-5
+						input(type="text", class="form-control",name = "budget", id="inputTitle",value=offer.offer.budget)
+				.form-group
+					label(for ="inputLocation",class="col-sm-3 control-label").
+						Location
+					.col-sm-5
+						input(type="text", class="form-control", id="inputLocation", name = "location",placeholder="Location",value=offer.offer.location)								
+				.form-group
+					div(class="col-sm-offset-3 col-sm-8")
+						.btn-toolbar
+							button(type="submit",class="btn btn-success custom-button-width")
+								|Update
+							button(type="button",class="btn btn-warning custom-button-width",onclick="window.location.reload()")
+								|Cancel
+			hr
+			form(action="/editoffer/"+offer.offer.title,method="post",class="form-horizontal")
+						.form-group
+							div(class="col-sm-2")
+								button(id="loginBtn",class="btn btn-danger btn-block",name="delete",value='1').
+									Delete				

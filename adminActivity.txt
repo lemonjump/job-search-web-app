@@ -1,0 +1,9 @@
+Admin Functions:
+
+- Update or delete any;
+--- User (freelancer, employer)
+--- Job posting
+
+- Ban/lock accounts for inappropriate user behaviour
+--- Need to create user rules on sign-up
+--- Keep track of what they do

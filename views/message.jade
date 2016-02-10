@@ -1,0 +1,34 @@
+extends header
+
+block content
+	.row
+		.col-md-12
+			h2
+				|New Message
+		.col-md-8
+			p
+					label(for ="recipient",class="col-sm-3 control-label").
+						To:
+					.col-sm-5
+						input(type="text",class="form-control",id="recipient",placeholder="Recipient Email",name="recipient")
+			br
+			br
+			p
+					label(for ="subject",class="col-sm-3 control-label").
+						Subject:
+					.col-md-5
+						input(type="text", class="form-control", id="subject",name="subject",placeholder="<No Subject>")
+			br
+			br
+			p
+					label(for ="body",class="col-sm-3 control-label").
+						Message:
+					.col-sm-5
+						textarea(class="form-control",rows="5", style="resize:none", id="body",placeholder="Message",name="body")
+						br
+					div(class="col-sm-offset-3 col-sm-8")
+						.btn-toolbar
+							button(type="submit",class="btn btn-success custom-button-width", onclick="sendMessage(#{logged_user.user})")
+								|Send
+							button(type="button",class="btn btn-danger custom-button-width",onclick="window.location.reload()")
+								|Cancel

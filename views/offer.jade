@@ -1,0 +1,84 @@
+extends header
+
+block content
+	.row
+		.col-md-8
+			h2= offer.offer.title
+				if (logged_user.user.email == offer.offer.postedBy || logged_user.user.role == 2)
+					small
+						a(href="/editoffer/#{offer.offer.title}")
+							|&nbsp;Edit
+			
+		.col-md-8
+			p
+				|Posted by: #{offer.offer.postedBy}
+			p
+				|Posted at: #{offer.offer.postedAt}	
+			p
+				|Description: #{offer.offer.description}
+
+			p
+				|Budget: #{offer.offer.budget}
+				|$/hour
+			p
+				|Location: #{offer.offer.location}
+				
+			p
+				|Status: #{offer.offer.status}  
+				if offer.offer.status != "Pending" && offer.offer.status != "Approved"  
+					|by 
+					a(href="/freelancers/"+offer.offer.acceptedBy)
+						|#{offer.offer.acceptedBy}
+			p
+				|Type: type1
+			p
+				|Views: #{offer.offer.viewCount}
+
+			if logged_user.user.role == 0 && offer.offer.status == "Pending"					
+				form(action="/offers/"+offer.offer.title,method="post",class="form-horizontal")
+					.form-group			
+						.btn-toolbar
+							div(class="col-sm-3")
+								button(type="submit",class="btn btn-success custom-button-width")
+									|Accept
+					.form-group
+						input(type="hidden" name="accepted" value=logged_user.user.email)
+
+
+			if logged_user.user.role == 1 && offer.offer.status == "Accepted"
+				hr
+				p
+					|Freelancer 
+					a(href="/freelancers/"+offer.offer.acceptedBy)
+						|#{offer.offer.acceptedBy}
+					|&nbsp;wants to work on this offer	
+				form(action="/offers/"+offer.offer.title,method="post",class="form-horizontal")
+					.form-group			
+						.btn-toolbar
+							div(class="col-sm-2")
+								button(type="submit",class="btn btn-success custom-button-width",name="approveStatus",value = 1)
+									|Approve
+							div(class="col-sm-2")
+								button(type="submit",class="btn btn-danger custom-button-width",name="approveStatus", value = -1)
+									|Reject	
+					.form-group
+						input(type="hidden" name="approve" value=offer.offer.acceptedBy)
+
+
+
+			if	offer.offer.status == "Approved" && offer.offer.acceptedBy == logged_user.user.email
+				form(action="/offers/"+offer.offer.title,method="post",class="form-horizontal")
+					.form-group			
+						.btn-toolbar
+							div(class="col-sm-3")
+								button(type="submit",class="btn btn-success custom-button-width")
+									|Done!
+					.form-group
+						input(type="hidden" name="done" value=logged_user.user.email)
+			
+			if offer.offer.status == "Done" && logged_user.user.email == offer.offer.postedBy
+				hr
+				p
+					a(href="../rate/"+offer.offer.acceptedBy)
+						|Rate
+						|#{offer.offer.acceptedBy}

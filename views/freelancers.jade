@@ -1,0 +1,66 @@
+extends header
+
+block content
+	.row
+		.col-md-12
+			h2 #{"Freelancers"}
+	div(class="row row-offcanvas row-offcanvas-right")
+		div(class="col-xs-12 col-sm-9")
+			.table-responsive
+				table(class="table table-striped", id="userList")
+					thead
+						th User Email
+						th Display Name
+						th Rating
+						th Jobs Completed
+						th Rate
+					tbody
+						for u in userlist
+							tr 
+								td
+									a(href='/freelancers/'+u.user.email)= u.user.email
+								td= u.user.name
+								td= u.user.rating
+								td= u.user.jobsDone
+								td
+									a(href='/rate/'+u.user.email) Rate me
+		div(class="col-xs-6 col-sm-3 sidebar-offcanvas",id="sidebar")
+			div(class="panel panel-default")
+				.panel-heading
+					|Search settings
+				.panel-body
+					form(action="",method="get")
+						|Email
+						br
+						br
+						.form-group
+							if query
+								input(type="text",
+								class="form-control",placeholder="Email",name="search",value=query.search)
+							else
+								input(type="text",class="form-control",placeholder="Search",name="search")
+						hr
+						|Rating >=
+						br
+						br
+						.form-group
+							if query
+								input(type="text",
+								class="form-control",placeholder="50",name="rating",value=query.rating)
+							else
+								input(type="text",class="form-control",placeholder="50",name="rating")
+						hr
+						|Jobs comleted >=
+						br
+						br		
+						.form-group
+							if query
+								input(type="text",
+								class="form-control",placeholder="1",name="jobsdone",value=query.jobsdone)
+							else
+								input(type="text",class="form-control",placeholder="1",name="jobsdone")		
+
+						
+						.form-group
+							button(type="submit",class="btn btn-info btn-block")
+								|Find				

@@ -1,0 +1,68 @@
+extends outer_header
+
+block content
+	div(class="col-sm-6 col-sm-offset-3")
+		h1
+			i(class="fa fa-sign-in")
+			&nbsp; Sign Up
+		br
+		if(message.length > 0)
+			div(class="alert alert-danger") #{message}
+		
+		form(class="form-horizontal",id="signupForm",name="adduser",action="/signup",onsubmit="return validateLogin()",method="post")
+			.form-group
+				label(for ="inputRole",class="col-sm-2 control-label").
+					Account type
+				.col-sm-6
+					.radio
+						label
+							input(type="radio" name="roleRadio",checked,value = 0)
+							|Freelancer
+					.radio
+						label
+							input(type="radio" name="roleRadio",value = 1)
+							|Employer
+					.radio
+						label
+							input(type="radio" name="roleRadio",value = 2)
+							|Admin			
+
+			.form-group
+				label(for ="inputEmail",class="col-sm-2 control-label").
+					Email
+				.col-sm-6
+					input(type="email",class="form-control",id="inputEmail",placeholder="Email",name="email",onkeyup="verifyEmail()")
+				.col-sm-1
+					span(id="validEmail",class="hide glyphicon glyphicon-ok text-success",aria-hidden="true",style="padding-top: 20%")
+					span(id="invalidEmail",class="hide glyphicon glyphicon-remove text-danger",aria-hidden="true",style="padding-top: 20%")
+						|&nbsp; Enter your email
+			.form-group
+				label(for ="inputPassword",class="col-sm-2 control-label").
+					Password
+				.col-sm-6
+					input(type="password",class="form-control",id="inputPassword",placeholder="Password",name="password",onkeyup="verifyPassword()")
+				.col-sm-1
+					span(id="invalidPass",class="hide glyphicon glyphicon-remove text-danger",aria hidden="true",style="padding-top: 50%")
+					span(id="validPass",class="hide glyphicon glyphicon-ok text-success",aria hidden="true",style="padding-top: 50%")
+
+			.form-group(id="confirmPassword")
+				label(for ="inputConfirmPassword",class="col-sm-2 control-label").
+					Confirm Password
+				.col-sm-6
+					input(type="password",class="form-control",id="inputConfirmPassword",placeholder="Password",name="confirmpassword",onkeyup="checkPass()")
+				.col-sm-1
+					span(id="invalidConfirm",class="hide glyphicon glyphicon-remove text-danger",aria-hidden="true",style="padding-top: 50%")
+						|&nbsp; Passwords don't match
+					span(id="validConfirm",class="hide glyphicon glyphicon-ok text-success",aria-hidden="true",style="padding-top: 50%")
+
+			.form-group
+				div(class="col-sm-offset-2 col-sm-6")
+					input(type="hidden",id="sscrRes",value="0x0",name="resolution")
+					button(type ="submit",id="addUserBtn",class="btn btn-success btn-block").
+						Sign Up
+		hr
+		p
+			|Already have an account ? 
+			a(href="/login")
+				|Login						
+	

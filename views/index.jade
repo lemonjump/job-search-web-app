@@ -1,0 +1,23 @@
+extends layout
+
+block content
+	.container
+		.page-header
+			.col-sm-1
+				a(href="/")
+					img(src="/public/images/rocket.png", alt="cool logo", class="img-responsive",heigh="50",width="50")
+			h1= title
+			p.lead #{appname}
+		.row
+			.col-md-6
+				p.text-center.
+						Have an Account ?
+				p.text-center
+					button(type ="button",class="btn btn-warning", onclick="login()").
+						Login
+			.col-md-6
+				p.text-center.
+					New to the app?
+				p.text-center
+					button(type ="button",class="btn btn-success", onclick="signup()").
+						Sign Up

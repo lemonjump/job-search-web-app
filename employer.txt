@@ -1,0 +1,14 @@
+Employer Attributes:
+
+- Username
+- Employer Name
+- Description
+- Location
+- Picture
+- Number of open contracts
+
+Admin view:
+- Number of job offers
+- Number of successful contracts (ie number of employees hired)
+- Number of reviews made
+- Length of inactivity

@@ -1,0 +1,113 @@
+extends header
+
+block content
+	.row
+		.col-md-12
+			div(class="col-sm-4")
+				h2 #{title+", "+logged_user.user.email}	
+		if logged_user.user.role == 1		
+			.col-md-12
+				div(class="col-sm-3")
+					form(class="form-horizontal",action="/newoffer")
+						.form-group
+							button(type="submit",class="btn btn-info btn-block").
+								Post new offer
+		div(class="col-sm-4 col-md-4 pull-left")
+			form(role="search",class="navbar-form",action="/offers",method="get")
+		if logged_user.user.role == 0 && suggestion
+			.col-md-12
+				div(class="col-sm-8")
+					.well
+						H4
+							|Suggested offer:
+						p
+							a(href="/offers/"+suggestion.offer.title)
+								|#{suggestion.offer.title}
+						p
+							|Budget:
+							|#{suggestion.offer.budget}
+						p
+							|Location:
+							|#{suggestion.offer.location}
+
+						p
+							|Offer viewed:
+							|#{suggestion.offer.viewCount}
+							| times
+						
+	
+	div(class="row row-offcanvas row-offcanvas-right")
+		div(class="col-xs-12 col-sm-9")
+			.table-responsive
+				table(class="table table-striped", id="userList")
+					thead
+						th Job Title
+						th Description
+						th Status
+						th Budget
+						th Location
+					tbody
+						for o in offerlist
+							tr 
+								td
+									a(href='/offers/'+o.offer.title)= o.offer.title
+								td= o.offer.description
+								td= o.offer.status
+								td= o.offer.budget
+								td= o.offer.location
+
+		div(class="col-xs-6 col-sm-3 sidebar-offcanvas",id="sidebar")
+			div(class="panel panel-default")
+				.panel-heading
+					|Search settings
+				.panel-body
+					form(action="",method="get")
+						|Title
+						br
+						br
+						.form-group
+							if query
+								input(type="text",
+								class="form-control",placeholder="Title",name="search",value=query.search)
+							else
+								input(type="text",class="form-control",placeholder="Search",name="search")
+						hr
+						|Location
+						br
+						br
+						.form-group
+							if query
+								input(type="text",
+								class="form-control",placeholder="City",name="location",value=query.location)
+							else
+								input(type="text",class="form-control",placeholder="City",name="location")
+						hr
+						|Status
+						br
+						br
+						.form-group
+							if query && query.status && query.status.indexOf("Pending") > -1
+								input(type="checkbox",name="status",value="Pending",checked="checked")
+							else
+								input(type="checkbox",name="status",value="Pending")
+							|&nbsp;Pending
+
+						.form-group
+							if query && query.status && query.status.indexOf("Approved") > -1
+								input(type="checkbox",name="status",value="Approved",checked="checked")
+							else
+								input(type="checkbox",name="status",value="Approved")
+							|&nbsp;Approved
+
+						.form-group
+							if query && query.status && query.status.indexOf("Done") > -1
+								input(type="checkbox",name="status",value="Done",checked="checked")
+							else
+								input(type="checkbox",name="status",value="Done")
+							|&nbsp;Done	
+
+						.form-group
+							button(type="submit",class="btn btn-info btn-block")
+								|Find
+	
+	#tests

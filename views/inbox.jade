@@ -1,0 +1,22 @@
+extends header
+
+block content
+	.row
+		.col-md-12
+			h2 #{logged_user.user.name + "'s Inbox"}
+
+	.table-responsive
+		table(class="table", id="messages")
+			thead
+				th From
+				th Subject
+				th Date Sent
+			tbody
+			a(href="/message")="+ New Message"
+				for msg in messageList
+					tr
+						td= msg.sender
+						td
+							a(href='/messages/' + msg.messageID)= msg.subject
+						td= msg.timeStamp
+	#tests
