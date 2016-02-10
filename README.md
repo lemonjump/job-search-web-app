@@ -1,4 +1,4 @@
-This is a web app developed by me and four other U of T students using NodeJS, ExpressJS, PassportJS, Jade, MongoDB, HTML, CSS.
+This is a class project developed by a team of U of T students (me, Artem Tselikov, Kristie Hunter, Yuan Meng) using NodeJS, ExpressJS, PassportJS, Jade, MongoDB, and HTML. 
 
 **Overview:**
 
